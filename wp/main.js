@@ -67,11 +67,13 @@ let anim = {
     timer:null,
     resolution:10,
     fps:20,
+    duration:30,
     frame:0,
     start(){
         clearTimeout(anim.timer)
         anim.list = generatePoints(70)
-        const looplength = 30 * anim.fps // seconds * fps
+        const looplength = anim.duration * anim.fps // seconds * fps
+        
         for(var i = 0; i < anim.list.length; i ++){
 
             const harmonics = 5
@@ -100,9 +102,18 @@ let anim = {
         }
 
         generate(anim.resolution, anim.list)
-        anim.frame++
+        
+        
+        
+        gif.options.width = c.width
+        gif.options.height = c.height
 
         gif.addFrame(ctx, {delay:1000/anim.fps,copy:true})
+        
+        if(anim.frame >= anim.duration*anim.fps){anim.halt()}
+
+        anim.frame++
+
     },
     halt(){
         clearTimeout(anim.timer)
