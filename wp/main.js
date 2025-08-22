@@ -66,12 +66,12 @@ let anim = {
     list:[],
     timer:null,
     resolution:10,
-    fps:30,
+    fps:20,
     frame:0,
     start(){
         clearTimeout(anim.timer)
         anim.list = generatePoints(70)
-        const looplength = 10 * anim.fps // seconds * fps
+        const looplength = 30 * anim.fps // seconds * fps
         for(var i = 0; i < anim.list.length; i ++){
 
             const harmonics = 5
@@ -102,7 +102,7 @@ let anim = {
         generate(anim.resolution, anim.list)
         anim.frame++
 
-        gif.addFrame(c, {delay:1000/anim.fps})
+        gif.addFrame(ctx, {delay:1000/anim.fps,copy:true})
     },
     halt(){
         clearTimeout(anim.timer)
