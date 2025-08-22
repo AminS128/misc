@@ -127,4 +127,5 @@ let anim = {
     }
 }
 
-var gif = new GIF({workers:1, quality:10})
+var gif = new GIF({workers:2, quality:40, dither:'Atkinson'})
+
