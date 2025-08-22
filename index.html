@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>wallpaper</title>
+        <link rel="stylesheet" href="../main.css">
+
+        <script src="gif.js"></script>
+        <!-- <script src="gif.worker.js"></script> -->
+    
+    </head>
+    <body>
+        <canvas style="width:100%; height:100vh" id="canvas"></canvas>
+
+        <script src="main.js" defer></script>
+
+        <button onclick="anim.halt();generate(6)">NEW</button>
+        <button onclick="anim.start()">START</button>
+        <button onclick="anim.halt()">HALT</button>
+    </body>
+</html>
