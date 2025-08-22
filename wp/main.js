@@ -110,6 +110,8 @@ let anim = {
             console.log(blob)
             window.open(URL.createObjectURL(blob))
         })
+        gif.width = c.width
+        gif.height = c.height
         gif.render()
     }
 }
