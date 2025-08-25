@@ -1,8 +1,7 @@
 const c = document.getElementById('canvas')
 const ctx = c.getContext('2d')
 
-function generate(res = 8, list2 = []){
-
+function generate(res = 8, list2 = [], count = 10){
 
     c.width = c.clientWidth;
     c.height = c.clientHeight
@@ -13,6 +12,14 @@ function generate(res = 8, list2 = []){
     }   
     
     let resolution = res;
+
+
+    let rf = (count % 1.5) - Math.max(0, 2*(count % 1.5) - 1.5)
+    let gf = ((count-1) % 1.5) - Math.max(0, 2*((count-1) % 1.5) - 1.5)
+    let bf = ((count-0.5) % 1.5) - Math.max(0, 2*((count-0.5) % 1.5) - 1.5)
+
+    console.log(rf,gf,bf)
+
     for(var i = 0; i < c.width/resolution; i ++){
         for(var ii = 0; ii < c.height/resolution;ii++){
             let num = 255*255
@@ -37,11 +44,13 @@ function generate(res = 8, list2 = []){
 
             let m1 = 255 - 8*(n2-n)
 
-            let a = 
+            let a = Math.abs(
             (500*Math.atan(m1/1505) + 
             (3+0.003*m1)*(n))*0.3
-    
-            ctx.fillStyle = `rgb(${a/3 + 20} ${a} ${a/2 + 20})`
+            )
+            
+            ctx.fillStyle = `rgb(${1.3*a*(rf + 0.2)} ${a*(gf + 0.2)} ${a*(bf + 0.3)})`
+
             ctx.fillRect(i*resolution, ii*resolution, resolution, resolution)
            
         }
@@ -84,7 +93,6 @@ let anim = {
             anim.list[i].push(resonantY*c.height*2/looplength)
             // anim.list[i].push(Math.random())
         }
-        generate(anim.resolution, anim.list)
         anim.timer = setInterval(anim.iterate, 1000/anim.fps)
     },
     iterate(){
@@ -101,8 +109,7 @@ let anim = {
             console.log(anim.list[0])
         }
 
-        generate(anim.resolution, anim.list)
-        
+        generate(anim.resolution, anim.list, anim.frame * (1.5 * 0.1 / (anim.fps)) + 10)
         
         
         gif.options.width = c.width
@@ -128,4 +135,3 @@ let anim = {
 }
 
 var gif = new GIF({workers:2, quality:40, dither:'Atkinson'})
-
