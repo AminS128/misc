@@ -3,7 +3,10 @@
 // types out the text in elements
 // text intended for element should be inside the element, it will get overwritten etc
 
-// load this last
+// load this script last with defer or similar, so that any constructor of the page on DOMContentLoaded will get accounted for
+// it does not account for any dynamic content being loaded (yet), it only applies the effect, etc directly on page load
+// so putting this script last means that any elements built in DOMContentLoaded by other scripts will get typewritered if needed
+// otherwise they will not be :)
 
 const typewriter = {
     className:"typewriter",
